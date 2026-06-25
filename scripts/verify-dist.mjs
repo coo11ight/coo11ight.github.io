@@ -1,0 +1,46 @@
+import { existsSync, readFileSync } from 'node:fs'
+import { join } from 'node:path'
+
+const requiredFiles = [
+  'dist/index.html',
+  'dist/blog/index.html',
+  'dist/about/index.html',
+  'dist/contact/index.html',
+  'dist/search/index.html',
+  'dist/rss.xml',
+  'dist/robots.txt'
+]
+
+const forbiddenFragments = [
+  '/links',
+  '/talks',
+  '/projects',
+  'DevMode',
+  'joye:toggle-dev',
+  'Joye Personal Blog'
+]
+
+const missing = requiredFiles.filter((file) => !existsSync(file))
+if (missing.length > 0) {
+  console.error(`Missing build files:\n${missing.join('\n')}`)
+  process.exit(1)
+}
+
+const htmlFiles = requiredFiles.filter((file) => file.endsWith('.html'))
+for (const file of htmlFiles) {
+  const html = readFileSync(file, 'utf8')
+  for (const fragment of forbiddenFragments) {
+    if (html.includes(fragment)) {
+      console.error(`Forbidden fragment "${fragment}" found in ${file}`)
+      process.exit(1)
+    }
+  }
+}
+
+const home = readFileSync(join('dist', 'index.html'), 'utf8')
+if (!home.includes('COOLAI')) {
+  console.error('Home page does not contain COOLAI')
+  process.exit(1)
+}
+
+console.log('dist verification passed')
