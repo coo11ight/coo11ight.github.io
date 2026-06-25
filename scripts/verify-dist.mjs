@@ -1,4 +1,4 @@
-import { existsSync, readFileSync } from 'node:fs'
+import { existsSync, readFileSync, readdirSync } from 'node:fs'
 import { join } from 'node:path'
 
 const requiredFiles = [
@@ -26,7 +26,14 @@ if (missing.length > 0) {
   process.exit(1)
 }
 
-const htmlFiles = requiredFiles.filter((file) => file.endsWith('.html'))
+const collectHtmlFiles = (directory) =>
+  readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name)
+    if (entry.isDirectory()) return collectHtmlFiles(path)
+    return entry.isFile() && entry.name.endsWith('.html') ? [path] : []
+  })
+
+const htmlFiles = collectHtmlFiles('dist')
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8')
   for (const fragment of forbiddenFragments) {
