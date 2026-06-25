@@ -33,6 +33,13 @@ const collectHtmlFiles = (directory) =>
     return entry.isFile() && entry.name.endsWith('.html') ? [path] : []
   })
 
+const collectCssFiles = (directory) =>
+  readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const path = join(directory, entry.name)
+    if (entry.isDirectory()) return collectCssFiles(path)
+    return entry.isFile() && entry.name.endsWith('.css') ? [path] : []
+  })
+
 const htmlFiles = collectHtmlFiles('dist')
 for (const file of htmlFiles) {
   const html = readFileSync(file, 'utf8')
@@ -47,6 +54,14 @@ for (const file of htmlFiles) {
 const home = readFileSync(join('dist', 'index.html'), 'utf8')
 if (!home.includes('COOLAI')) {
   console.error('Home page does not contain COOLAI')
+  process.exit(1)
+}
+
+const css = collectCssFiles('dist').map((file) => readFileSync(file, 'utf8')).join('\n')
+const requiredCssSelectors = ['.max-w-5xl', '.text-3xl', '.bg-background', '.prose']
+const missingCssSelectors = requiredCssSelectors.filter((selector) => !css.includes(selector))
+if (missingCssSelectors.length > 0) {
+  console.error(`Missing generated CSS selectors:\n${missingCssSelectors.join('\n')}`)
   process.exit(1)
 }
 

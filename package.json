@@ -18,5 +18,9 @@
     "astro": "^6.1.8",
     "astro-pure": "1.4.6",
     "typescript": "^5.8.3"
+  },
+  "devDependencies": {
+    "@unocss/astro": "^66.7.2",
+    "unocss": "^66.7.2"
   }
 }
