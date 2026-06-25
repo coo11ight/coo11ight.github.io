@@ -7,12 +7,13 @@ import { integ } from '@/site.config'
 
 <BaseLayout meta={{ title: 'Search', description: '搜索 COOLAI', noindex: true }}>
   <main class="mx-auto max-w-3xl">
+    <p class="coolai-kicker mb-3">Search</p>
     <h1 class="mb-4 text-3xl font-semibold">Search</h1>
     {integ.pagefind ? (
-      <>
+      <div class="coolai-surface p-5">
         <p class="mb-4 text-muted-foreground">搜索文章、标签和静态页面。</p>
         <PFSearch />
-      </>
+      </div>
     ) : (
       <p class="text-muted-foreground">Search is disabled.</p>
     )}

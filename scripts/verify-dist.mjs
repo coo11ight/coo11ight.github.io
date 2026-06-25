@@ -57,8 +57,31 @@ if (!home.includes('COOLAI')) {
   process.exit(1)
 }
 
+const requiredHtmlFragments = [
+  ['dist/index.html', 'data-polish="home-hero"'],
+  ['dist/blog/coolai-start/index.html', 'data-polish="article-hero"'],
+  ['dist/about/index.html', 'data-polish="about-focus"'],
+  ['dist/contact/index.html', 'data-polish="contact-stack"']
+]
+for (const [file, fragment] of requiredHtmlFragments) {
+  const html = readFileSync(file, 'utf8')
+  if (!html.includes(fragment)) {
+    console.error(`Missing HTML fragment "${fragment}" in ${file}`)
+    process.exit(1)
+  }
+}
+
 const css = collectCssFiles('dist').map((file) => readFileSync(file, 'utf8')).join('\n')
-const requiredCssSelectors = ['.max-w-5xl', '.text-3xl', '.bg-background', '.prose']
+const requiredCssSelectors = [
+  '.max-w-5xl',
+  '.text-3xl',
+  '.bg-background',
+  '.prose',
+  '.coolai-surface',
+  '.coolai-hero-mark',
+  '.coolai-post-card',
+  '.coolai-article-hero'
+]
 const missingCssSelectors = requiredCssSelectors.filter((selector) => !css.includes(selector))
 if (missingCssSelectors.length > 0) {
   console.error(`Missing generated CSS selectors:\n${missingCssSelectors.join('\n')}`)

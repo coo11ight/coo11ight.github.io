@@ -26,20 +26,23 @@ const articleDate = (post.data.updatedDate ?? post.data.publishDate).toISOString
 >
   <main class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
     <article id="content" class="min-w-0">
-      <a href="/blog" class="mb-8 inline-flex text-sm text-muted-foreground hover:text-primary">
-        ← Back to Blog
-      </a>
-      <header class="mb-8 border-b pb-8">
-        <p class="mb-3 text-sm text-muted-foreground">
-          <FormattedDate date={post.data.publishDate} />
-        </p>
-        <h1 class="mb-4 text-3xl font-semibold leading-tight sm:text-4xl">{post.data.title}</h1>
-        <p class="text-lg text-muted-foreground">{post.data.description}</p>
+      <header data-polish="article-hero" class="coolai-article-hero mb-9">
+        <div class="mb-8 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
+          <a href="/blog" class="inline-flex hover:text-primary">
+            ← Back to Blog
+          </a>
+          <p>
+            <FormattedDate date={post.data.publishDate} />
+          </p>
+        </div>
+        <p class="coolai-kicker mb-4">Article</p>
+        <h1 class="max-w-3xl text-4xl font-semibold leading-tight sm:text-5xl">{post.data.title}</h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">{post.data.description}</p>
         {post.data.tags.length > 0 && (
           <ul class="mt-5 flex flex-wrap gap-2">
             {post.data.tags.map((tag) => (
               <li>
-                <a class="rounded-full border px-3 py-1 text-sm text-muted-foreground hover:bg-muted" href={`/tags/${tag}`}>
+                <a class="coolai-tag" href={`/tags/${tag}`}>
                   #{tag}
                 </a>
               </li>
@@ -55,7 +58,7 @@ const articleDate = (post.data.updatedDate ?? post.data.publishDate).toISOString
     </article>
     {headings.length > 0 && (
       <aside class="hidden lg:block">
-        <div class="sticky top-28 text-sm">
+        <div class="coolai-surface sticky top-28 p-4 text-sm">
           <TOC {headings} />
         </div>
       </aside>

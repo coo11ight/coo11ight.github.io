@@ -5,8 +5,8 @@ import { Paginator } from 'astro-pure/components/pages'
 import { FormattedDate } from 'astro-pure/user'
 
 import BaseLayout from '@/layouts/BaseLayout.astro'
-import config from '@/site.config'
 import { getPosts, getUniqueTags } from '@/lib/posts'
+import config from '@/site.config'
 
 export const getStaticPaths = (async ({ paginate }) => {
   const posts = await getPosts()
@@ -33,23 +33,24 @@ const paginationProps = {
 <BaseLayout meta={{ title: 'Blog', description: 'COOLAI 的文章列表' }}>
   <main class="grid gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
     <section>
-      <h1 class="mb-3 text-3xl font-semibold">Blog</h1>
-      <p class="mb-8 text-muted-foreground">
+      <p class="coolai-kicker mb-3">Archive</p>
+      <h1 class="text-3xl font-semibold">Blog</h1>
+      <p class="mt-3 mb-8 text-muted-foreground">
         Page {page.currentPage} · Showing {page.data.length} of {total} posts
       </p>
       <ul class="flex flex-col gap-4">
         {page.data.map((post) => (
-          <li class="rounded-xl border bg-background p-5 transition-colors hover:bg-muted">
-            <a href={`/blog/${post.id}`} class="block">
+          <li>
+            <a href={`/blog/${post.id}`} class="coolai-post-card">
               <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
                 <h2 class="text-lg font-medium">{post.data.title}</h2>
                 <span class="text-sm text-muted-foreground">
                   <FormattedDate date={post.data.publishDate} />
                 </span>
               </div>
-              <p class="mt-2 text-muted-foreground">{post.data.description}</p>
-              <div class="mt-4 flex flex-wrap gap-2 text-sm text-muted-foreground">
-                {post.data.tags.map((tag) => <span>#{tag}</span>)}
+              <p class="mt-3 max-w-2xl text-sm leading-6 text-muted-foreground">{post.data.description}</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                {post.data.tags.map((tag) => <span class="coolai-tag">#{tag}</span>)}
               </div>
             </a>
           </li>
@@ -58,16 +59,18 @@ const paginationProps = {
       <Paginator {...paginationProps} />
     </section>
     <aside>
-      <h2 class="mb-4 text-lg font-semibold">Tags</h2>
-      <ul class="flex flex-wrap gap-2">
-        {tags.map((tag) => (
-          <li>
-            <a class="rounded-full border px-3 py-1 text-sm text-muted-foreground hover:bg-muted" href={`/tags/${tag}`}>
-              #{tag}
-            </a>
-          </li>
-        ))}
-      </ul>
+      <div class="coolai-surface p-4">
+        <h2 class="mb-4 text-lg font-semibold">Tags</h2>
+        <ul class="flex flex-wrap gap-2">
+          {tags.map((tag) => (
+            <li>
+              <a class="coolai-tag" href={`/tags/${tag}`}>
+                #{tag}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
     </aside>
   </main>
 </BaseLayout>

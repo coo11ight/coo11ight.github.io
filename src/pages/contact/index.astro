@@ -1,19 +1,39 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const contactItems = [
+  ['Email', '公开邮箱稍后补上。现在先把站点内容和写作节奏稳定下来。'],
+  ['GitHub', '代码入口会在准备好公开项目后添加。'],
+  ['Notes', '适合交流 AI 工具、前端实践、学习方法和个人网站搭建。']
+]
 ---
 
 <BaseLayout meta={{ title: 'Contact', description: '联系 COOLAI' }}>
-  <main class="mx-auto max-w-3xl">
-    <h1 class="mb-6 text-3xl font-semibold">Contact</h1>
-    <div class="grid gap-3">
-      <div class="rounded-xl border p-5">
-        <h2 class="font-medium">Email</h2>
-        <p class="mt-2 text-muted-foreground">暂未配置公开邮箱。</p>
+  <main class="mx-auto max-w-4xl">
+    <section data-polish="contact-stack" class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div>
+        <p class="coolai-kicker mb-3">Contact</p>
+        <h1 class="text-4xl font-semibold leading-tight">Contact</h1>
+        <p class="mt-5 max-w-2xl text-lg leading-8 text-muted-foreground">
+          这个页面先作为轻量入口。等邮箱、GitHub 和长期身份信息确定后，再把真实链接放进来。
+        </p>
       </div>
-      <div class="rounded-xl border p-5">
-        <h2 class="font-medium">GitHub</h2>
-        <p class="mt-2 text-muted-foreground">暂未配置公开 GitHub 链接。</p>
-      </div>
-    </div>
+      <aside class="coolai-hero-mark p-5">
+        <p class="text-sm text-muted-foreground">Status</p>
+        <p class="mt-2 text-2xl font-semibold">Open to notes</p>
+        <p class="mt-4 text-sm leading-6 text-muted-foreground">
+          先让站点保持干净，联系方式后面补齐。
+        </p>
+      </aside>
+    </section>
+
+    <section class="mt-12 grid gap-3 md:grid-cols-3">
+      {contactItems.map(([title, text]) => (
+        <article class="coolai-surface p-5">
+          <h2 class="font-semibold">{title}</h2>
+          <p class="mt-3 text-sm leading-6 text-muted-foreground">{text}</p>
+        </article>
+      ))}
+    </section>
   </main>
 </BaseLayout>

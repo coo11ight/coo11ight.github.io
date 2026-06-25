@@ -1,47 +1,47 @@
 :root {
-  --background: 210 33% 99%;
-  --foreground: 240 10% 3.9%;
+  --background: 165 18% 98%;
+  --foreground: 220 12% 8%;
   --card: 0 0% 100%;
-  --card-foreground: 240 10% 3.9%;
+  --card-foreground: 220 12% 8%;
   --popover: 0 0% 100%;
-  --popover-foreground: 240 10% 3.9%;
-  --primary: 198 54% 45%;
+  --popover-foreground: 220 12% 8%;
+  --primary: 168 80% 31%;
   --primary-foreground: 0 0% 98%;
-  --secondary: 240 4.8% 95.9%;
-  --secondary-foreground: 240 5.9% 10%;
-  --muted: 240 4.8% 95%;
-  --muted-foreground: 240 3.8% 36%;
-  --accent: 240 4.8% 95.9%;
-  --accent-foreground: 240 5.9% 10%;
+  --secondary: 150 12% 94%;
+  --secondary-foreground: 220 12% 12%;
+  --muted: 150 12% 94%;
+  --muted-foreground: 220 8% 38%;
+  --accent: 34 94% 54%;
+  --accent-foreground: 220 12% 8%;
   --destructive: 0 72% 50%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 5.9% 88%;
-  --input: 240 5.9% 90%;
-  --ring: 198 54% 45%;
+  --border: 160 9% 86%;
+  --input: 160 9% 88%;
+  --ring: 168 80% 31%;
   --radius: 0.5rem;
   --un-default-border-color: hsl(var(--border) / 1);
 }
 
 .dark {
-  --background: 240 20% 5%;
-  --foreground: 0 0% 98%;
-  --card: 240 10% 4%;
+  --background: 120 6% 7%;
+  --foreground: 0 0% 96%;
+  --card: 120 5% 10%;
   --card-foreground: 0 0% 98%;
-  --popover: 240 10% 4%;
+  --popover: 120 5% 10%;
   --popover-foreground: 0 0% 98%;
-  --primary: 195 95% 85%;
-  --primary-foreground: 240 4% 16%;
-  --secondary: 240 4% 16%;
+  --primary: 166 74% 62%;
+  --primary-foreground: 120 6% 8%;
+  --secondary: 120 4% 16%;
   --secondary-foreground: 0 0% 98%;
-  --muted: 240 6% 12%;
-  --muted-foreground: 240 5% 75%;
-  --accent: 240 4% 16%;
-  --accent-foreground: 0 0% 98%;
+  --muted: 120 4% 15%;
+  --muted-foreground: 120 5% 72%;
+  --accent: 35 95% 60%;
+  --accent-foreground: 120 6% 8%;
   --destructive: 0 63% 31%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 4% 20%;
-  --input: 240 4% 16%;
-  --ring: 195 95% 85%;
+  --border: 120 4% 22%;
+  --input: 120 4% 18%;
+  --ring: 166 74% 62%;
 }
 
 html {
@@ -57,6 +57,11 @@ html.dark {
 body {
   min-height: 100vh;
   margin: 0;
+  background:
+    linear-gradient(hsl(var(--border) / 0.2) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--border) / 0.16) 1px, transparent 1px),
+    hsl(var(--background) / 1);
+  background-size: 42px 42px;
 }
 
 a {
@@ -67,11 +72,120 @@ a:hover {
   color: hsl(var(--primary) / 1);
 }
 
+.coolai-shell {
+  min-height: 100vh;
+}
+
+.coolai-kicker {
+  color: hsl(var(--primary) / 1);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.coolai-surface {
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 8px;
+  background: hsl(var(--card) / 0.82);
+  box-shadow: 0 18px 60px hsl(var(--foreground) / 0.08);
+}
+
+.coolai-hero-mark {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 8px;
+  background:
+    linear-gradient(hsl(var(--primary) / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px),
+    hsl(var(--card) / 0.9);
+  background-size: 22px 22px;
+}
+
+.coolai-hero-mark::after {
+  content: "";
+  position: absolute;
+  inset: auto 18px 18px auto;
+  width: 82px;
+  height: 6px;
+  border-radius: 999px;
+  background: hsl(var(--accent) / 0.9);
+}
+
+.coolai-stat {
+  border-left: 2px solid hsl(var(--primary) / 1);
+  padding-left: 0.875rem;
+}
+
+.coolai-post-card {
+  display: block;
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 8px;
+  background: hsl(var(--card) / 0.82);
+  padding: 1.25rem;
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.coolai-post-card:hover {
+  border-color: hsl(var(--primary) / 0.7);
+  background: hsl(var(--card) / 1);
+  color: hsl(var(--foreground) / 1);
+  transform: translateY(-2px);
+}
+
+.coolai-article-hero {
+  border-bottom: 1px solid hsl(var(--border) / 1);
+  padding-bottom: 2rem;
+}
+
+.coolai-tag {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 999px;
+  padding: 0.25rem 0.75rem;
+  color: hsl(var(--muted-foreground) / 1);
+  font-size: 0.875rem;
+}
+
+.coolai-tag:hover {
+  border-color: hsl(var(--primary) / 0.65);
+  background: hsl(var(--primary) / 0.08);
+  color: hsl(var(--primary) / 1);
+}
+
 .prose :where(a) {
   color: hsl(var(--foreground) / 1);
   font-weight: 600;
+  text-decoration: underline;
+  text-decoration-color: hsl(var(--primary) / 0.35);
+  text-underline-offset: 0.2em;
+}
+
+.prose :where(p, li) {
+  color: hsl(var(--foreground) / 0.82);
+  line-height: 1.85;
+}
+
+.prose :where(h2, h3) {
+  color: hsl(var(--foreground) / 1);
+  font-weight: 650;
 }
 
 .prose :where(pre) {
   border: 1px solid hsl(var(--border) / 1);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.prose :where(code):not(pre code) {
+  border: 1px solid hsl(var(--border) / 1);
+  border-radius: 6px;
+  background: hsl(var(--muted) / 0.8);
+  padding: 0.08rem 0.35rem;
+  font-size: 0.9em;
 }

@@ -1,17 +1,46 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro'
+
+const focusItems = [
+  ['AI', '记录工具、提示词、工作流，以及它们真正节省时间的地方。'],
+  ['Code', '把前端、工程实践和小型项目的取舍写清楚。'],
+  ['Learning', '用复盘把零散输入变成可以再次使用的知识。']
+]
 ---
 
 <BaseLayout meta={{ title: 'About', description: '关于 COOLAI' }}>
-  <main class="mx-auto max-w-3xl">
-    <h1 class="mb-6 text-3xl font-semibold">About COOLAI</h1>
-    <div class="prose max-w-none">
-      <p>
-        COOLAI 是一个个人博客，用来记录 AI、编程、产品理解和学习过程中的问题与复盘。
-      </p>
-      <p>
-        第一版先保持简单：认真写文章，保持页面清爽，让内容比装饰更靠前。
-      </p>
-    </div>
+  <main class="mx-auto max-w-4xl">
+    <section data-polish="about-focus" class="grid gap-8 lg:grid-cols-[minmax(0,1fr)_18rem]">
+      <div>
+        <p class="coolai-kicker mb-3">About</p>
+        <h1 class="text-4xl font-semibold leading-tight">About COOLAI</h1>
+        <div class="prose mt-7 max-w-none">
+          <p>
+            COOLAI 是一个个人写作空间，用来记录 AI、编程、产品理解和学习过程里的问题与复盘。
+            第一版先保持轻量，让内容比装饰更靠前。
+          </p>
+          <p>
+            这里不会急着做成完整作品集。更重要的是把日常遇到的问题写下来，让下一次思考可以从更高一点的位置开始。
+          </p>
+        </div>
+      </div>
+
+      <aside class="coolai-surface p-5">
+        <p class="text-sm text-muted-foreground">Current rhythm</p>
+        <p class="mt-2 text-2xl font-semibold">Small notes, often.</p>
+        <p class="mt-4 text-sm leading-6 text-muted-foreground">
+          用短文章先跑通写作节奏，再慢慢替换成真实项目、经验和长期主题。
+        </p>
+      </aside>
+    </section>
+
+    <section class="mt-12 grid gap-3 md:grid-cols-3">
+      {focusItems.map(([title, text]) => (
+        <article class="coolai-surface p-5">
+          <h2 class="font-semibold">{title}</h2>
+          <p class="mt-3 text-sm leading-6 text-muted-foreground">{text}</p>
+        </article>
+      ))}
+    </section>
   </main>
 </BaseLayout>

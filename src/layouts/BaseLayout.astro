@@ -24,11 +24,11 @@ const { meta } = Astro.props
     <BaseHead {...meta} />
     <ThemeProvider />
   </head>
-  <body class="flex justify-center bg-background text-foreground">
-    <div class="w-full max-w-[70rem] px-4 sm:px-7 lg:px-10">
+  <body class="flex justify-center bg-background text-foreground antialiased">
+    <div class="coolai-shell w-full max-w-[72rem] px-4 sm:px-7 lg:px-10">
       <Header />
       <slot />
-      <footer class="mx-auto mb-5 mt-16 border-t pt-5 text-sm text-muted-foreground">
+      <footer class="mx-auto mb-5 mt-20 border-t pt-5 text-sm text-muted-foreground">
         <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} COOLAI</p>
           <p>
