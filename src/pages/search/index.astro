@@ -1,0 +1,20 @@
+---
+import { PFSearch } from 'astro-pure/components/pages'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { integ } from '@/site.config'
+---
+
+<BaseLayout meta={{ title: 'Search', description: '搜索 COOLAI', noindex: true }}>
+  <main class="mx-auto max-w-3xl">
+    <h1 class="mb-4 text-3xl font-semibold">Search</h1>
+    {integ.pagefind ? (
+      <>
+        <p class="mb-4 text-muted-foreground">搜索文章、标签和静态页面。</p>
+        <PFSearch />
+      </>
+    ) : (
+      <p class="text-muted-foreground">Search is disabled.</p>
+    )}
+  </main>
+</BaseLayout>
