@@ -1,0 +1,22 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getPosts, getUniqueTags } from '@/lib/posts'
+
+const posts = await getPosts()
+const tags = getUniqueTags(posts)
+---
+
+<BaseLayout meta={{ title: 'Tags', description: 'COOLAI 的文章标签' }}>
+  <main class="mx-auto max-w-3xl">
+    <h1 class="mb-6 text-3xl font-semibold">Tags</h1>
+    <ul class="flex flex-wrap gap-3">
+      {tags.map((tag) => (
+        <li>
+          <a class="rounded-full border px-4 py-2 text-muted-foreground hover:bg-muted" href={`/tags/${tag}`}>
+            #{tag}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </main>
+</BaseLayout>

@@ -1,0 +1,64 @@
+---
+import type { MarkdownHeading } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { ArticleBottom, TOC } from 'astro-pure/components/pages'
+import { FormattedDate } from 'astro-pure/user'
+
+import Comment from '@/components/comment/Comment.astro'
+import BaseLayout from '@/layouts/BaseLayout.astro'
+
+interface Props {
+  post: CollectionEntry<'blog'>
+  posts: CollectionEntry<'blog'>[]
+  headings: MarkdownHeading[]
+}
+
+const { post, posts, headings } = Astro.props
+const articleDate = (post.data.updatedDate ?? post.data.publishDate).toISOString()
+---
+
+<BaseLayout
+  meta={{
+    title: post.data.title,
+    description: post.data.description,
+    articleDate
+  }}
+>
+  <main class="mx-auto grid max-w-5xl gap-10 lg:grid-cols-[minmax(0,1fr)_16rem]">
+    <article id="content" class="min-w-0">
+      <a href="/blog" class="mb-8 inline-flex text-sm text-muted-foreground hover:text-primary">
+        ← Back to Blog
+      </a>
+      <header class="mb-8 border-b pb-8">
+        <p class="mb-3 text-sm text-muted-foreground">
+          <FormattedDate date={post.data.publishDate} />
+        </p>
+        <h1 class="mb-4 text-3xl font-semibold leading-tight sm:text-4xl">{post.data.title}</h1>
+        <p class="text-lg text-muted-foreground">{post.data.description}</p>
+        {post.data.tags.length > 0 && (
+          <ul class="mt-5 flex flex-wrap gap-2">
+            {post.data.tags.map((tag) => (
+              <li>
+                <a class="rounded-full border px-3 py-1 text-sm text-muted-foreground hover:bg-muted" href={`/tags/${tag}`}>
+                  #{tag}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
+      </header>
+      <div class="prose max-w-none">
+        <slot />
+      </div>
+      <ArticleBottom id={post.id} collections={posts} class="mt-10" />
+      {post.data.comment && <Comment class="mt-10" path={`/blog/${post.id}`} />}
+    </article>
+    {headings.length > 0 && (
+      <aside class="hidden lg:block">
+        <div class="sticky top-28 text-sm">
+          <TOC {headings} />
+        </div>
+      </aside>
+    )}
+  </main>
+</BaseLayout>

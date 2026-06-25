@@ -1,0 +1,51 @@
+---
+import { FormattedDate } from 'astro-pure/user'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import { getPosts } from '@/lib/posts'
+
+const posts = (await getPosts()).slice(0, 5)
+---
+
+<BaseLayout meta={{ title: 'COOLAI', description: '写作、技术与 AI 学习记录' }}>
+  <main class="mx-auto max-w-3xl">
+    <section class="mb-12 flex flex-col gap-6">
+      <div class="flex size-16 items-center justify-center rounded-2xl border bg-muted text-xl font-semibold">
+        CA
+      </div>
+      <div>
+        <h1 class="text-4xl font-semibold tracking-normal">COOLAI</h1>
+        <p class="mt-4 text-lg leading-8 text-muted-foreground">
+          写作、技术与 AI 学习记录。这里先从小文章开始，把问题、实验和复盘稳定沉淀下来。
+        </p>
+      </div>
+      <ul class="flex flex-wrap gap-2 text-sm">
+        {['AI', 'Frontend', 'Learning Notes'].map((item) => (
+          <li class="rounded-full border px-3 py-1 text-muted-foreground">{item}</li>
+        ))}
+      </ul>
+    </section>
+
+    <section>
+      <div class="mb-5 flex items-center justify-between">
+        <h2 class="text-2xl font-semibold">Latest Posts</h2>
+        <a href="/blog" class="text-sm text-muted-foreground hover:text-primary">View all →</a>
+      </div>
+      <ul class="flex flex-col gap-3">
+        {posts.map((post) => (
+          <li class="rounded-xl border bg-background p-5 transition-colors hover:bg-muted">
+            <a href={`/blog/${post.id}`} class="block">
+              <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+                <h3 class="font-medium">{post.data.title}</h3>
+                <span class="text-sm text-muted-foreground">
+                  <FormattedDate date={post.data.publishDate} />
+                </span>
+              </div>
+              <p class="mt-2 text-sm leading-6 text-muted-foreground">{post.data.description}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  </main>
+</BaseLayout>

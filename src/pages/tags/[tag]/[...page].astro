@@ -1,0 +1,55 @@
+---
+import type { GetStaticPaths, Page } from 'astro'
+import type { CollectionEntry } from 'astro:content'
+import { Paginator } from 'astro-pure/components/pages'
+import { FormattedDate } from 'astro-pure/user'
+
+import BaseLayout from '@/layouts/BaseLayout.astro'
+import config from '@/site.config'
+import { getPosts, getPostsByTag, getUniqueTags } from '@/lib/posts'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getPosts()
+  return getUniqueTags(posts).flatMap((tag) => {
+    return paginate(getPostsByTag(posts, tag), {
+      params: { tag },
+      pageSize: config.content.blogPageSize,
+      props: { tag }
+    })
+  })
+}) satisfies GetStaticPaths
+
+interface Props {
+  page: Page<CollectionEntry<'blog'>>
+  tag: string
+}
+
+const { page, tag } = Astro.props
+const paginationProps = {
+  ...(page.url.prev && { prevUrl: { text: '← Previous', url: page.url.prev } }),
+  ...(page.url.next && { nextUrl: { text: 'Next →', url: page.url.next } })
+}
+---
+
+<BaseLayout meta={{ title: `#${tag}`, description: `COOLAI 标签 ${tag} 下的文章` }}>
+  <main class="mx-auto max-w-3xl">
+    <a href="/tags" class="mb-8 inline-flex text-sm text-muted-foreground hover:text-primary">← All tags</a>
+    <h1 class="mb-6 text-3xl font-semibold">#{tag}</h1>
+    <ul class="flex flex-col gap-4">
+      {page.data.map((post) => (
+        <li class="rounded-xl border bg-background p-5 transition-colors hover:bg-muted">
+          <a href={`/blog/${post.id}`} class="block">
+            <div class="flex flex-col gap-2 sm:flex-row sm:items-baseline sm:justify-between">
+              <h2 class="text-lg font-medium">{post.data.title}</h2>
+              <span class="text-sm text-muted-foreground">
+                <FormattedDate date={post.data.publishDate} />
+              </span>
+            </div>
+            <p class="mt-2 text-muted-foreground">{post.data.description}</p>
+          </a>
+        </li>
+      ))}
+    </ul>
+    <Paginator {...paginationProps} />
+  </main>
+</BaseLayout>
