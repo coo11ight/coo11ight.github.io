@@ -11,7 +11,7 @@ export async function getPosts() {
 }
 
 export function sortPostsByDate(posts: BlogPost[]) {
-  return posts.sort((a, b) => {
+  return [...posts].sort((a, b) => {
     const aDate = a.data.updatedDate ?? a.data.publishDate
     const bDate = b.data.updatedDate ?? b.data.publishDate
     return bDate.getTime() - aDate.getTime()

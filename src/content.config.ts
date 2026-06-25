@@ -1,5 +1,6 @@
-import { defineCollection, z } from 'astro:content'
+import { defineCollection } from 'astro:content'
 import { glob } from 'astro/loaders'
+import { z } from 'astro/zod'
 
 function normalizeTags(tags: string[]) {
   return Array.from(new Set(tags.map((tag) => tag.trim().toLowerCase()).filter(Boolean)))
