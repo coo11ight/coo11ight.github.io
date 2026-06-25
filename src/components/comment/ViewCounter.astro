@@ -1,0 +1,40 @@
+---
+const serverURL = import.meta.env.PUBLIC_WALINE_SERVER
+const path = Astro.url.pathname
+---
+
+{
+  serverURL && (
+    <coolai-view-counter data-server={serverURL}>
+      <span class="coolai-hidden-view waline-pageview-count" data-path={path} aria-hidden="true"></span>
+    </coolai-view-counter>
+  )
+}
+
+<script>
+  import { pageviewCount } from '@waline/client'
+
+  class CoolaiViewCounter extends HTMLElement {
+    connectedCallback() {
+      if (document.querySelector('coolai-comment')) return
+      const serverURL = this.dataset.server || ''
+      if (!serverURL) return
+      pageviewCount({ serverURL, selector: '.waline-pageview-count' })
+    }
+  }
+
+  if (!customElements.get('coolai-view-counter')) {
+    customElements.define('coolai-view-counter', CoolaiViewCounter)
+  }
+</script>
+
+<style>
+  .coolai-hidden-view {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+</style>

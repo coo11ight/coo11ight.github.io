@@ -1,0 +1,65 @@
+---
+import '@waline/client/style'
+
+interface Props {
+  class?: string
+  path?: string
+}
+
+const { class: className = '', path = Astro.url.pathname } = Astro.props
+const serverURL = import.meta.env.PUBLIC_WALINE_SERVER
+---
+
+{
+  serverURL ? (
+    <coolai-comment data-server={serverURL} data-path={path}>
+      <div id="waline" class:list={['not-prose', className]}>
+        评论加载中...
+      </div>
+    </coolai-comment>
+  ) : (
+    <section class:list={['rounded-xl border bg-muted p-5 text-sm text-muted-foreground', className]}>
+      评论区将在配置 Waline 服务后启用。
+    </section>
+  )
+}
+
+<script>
+  import { init as walineInit } from '@waline/client'
+
+  class CoolaiComment extends HTMLElement {
+    connectedCallback() {
+      const serverURL = this.dataset.server || ''
+      if (!serverURL) return
+
+      ;(globalThis as unknown as { __VUE_OPTIONS_API__: boolean }).__VUE_OPTIONS_API__ = true
+      ;(globalThis as unknown as { __VUE_PROD_DEVTOOLS__: boolean }).__VUE_PROD_DEVTOOLS__ = false
+
+      walineInit({
+        el: '#waline',
+        serverURL,
+        path: this.dataset.path || window.location.pathname,
+        pageview: true,
+        comment: true
+      })
+    }
+  }
+
+  if (!customElements.get('coolai-comment')) {
+    customElements.define('coolai-comment', CoolaiComment)
+  }
+</script>
+
+<style>
+  #waline {
+    --waline-font-size: 16px;
+    --waline-theme-color: hsl(var(--foreground) / 1);
+    --waline-active-color: hsl(var(--primary) / 1);
+    --waline-color: hsl(var(--muted-foreground) / 1);
+    --waline-bg-color: hsl(var(--muted) / 1);
+    --waline-bg-color-light: hsl(var(--background) / 1);
+    --waline-border-color: hsl(var(--border) / 1);
+    --waline-avatar-radius: 50%;
+    --waline-box-shadow: none;
+  }
+</style>
