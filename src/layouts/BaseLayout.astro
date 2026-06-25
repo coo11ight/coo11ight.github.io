@@ -1,0 +1,44 @@
+---
+import { Header, ThemeProvider } from 'astro-pure/components/basic'
+
+import BaseHead from '@/components/BaseHead.astro'
+import ViewCounter from '@/components/comment/ViewCounter.astro'
+import config from '@/site.config'
+
+import '@/assets/styles/app.css'
+
+interface Props {
+  meta: {
+    title: string
+    description?: string
+    articleDate?: string
+    noindex?: boolean
+  }
+}
+
+const { meta } = Astro.props
+---
+
+<html lang={config.locale.lang}>
+  <head>
+    <BaseHead {...meta} />
+    <ThemeProvider />
+  </head>
+  <body class="flex justify-center bg-background text-foreground">
+    <div class="w-full max-w-[70rem] px-4 sm:px-7 lg:px-10">
+      <Header />
+      <slot />
+      <footer class="mx-auto mb-5 mt-16 border-t pt-5 text-sm text-muted-foreground">
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} COOLAI</p>
+          <p>
+            Built with <a href="https://astro.build/" target="_blank" rel="noreferrer">Astro</a>
+            and
+            <a href="https://astro-pure.js.org/" target="_blank" rel="noreferrer">Pure</a>.
+          </p>
+        </div>
+      </footer>
+    </div>
+    <ViewCounter />
+  </body>
+</html>

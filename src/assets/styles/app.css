@@ -1,0 +1,77 @@
+:root {
+  --background: 210 33% 99%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 198 54% 45%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95%;
+  --muted-foreground: 240 3.8% 36%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 72% 50%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 88%;
+  --input: 240 5.9% 90%;
+  --ring: 198 54% 45%;
+  --radius: 0.5rem;
+  --un-default-border-color: hsl(var(--border) / 1);
+}
+
+.dark {
+  --background: 240 20% 5%;
+  --foreground: 0 0% 98%;
+  --card: 240 10% 4%;
+  --card-foreground: 0 0% 98%;
+  --popover: 240 10% 4%;
+  --popover-foreground: 0 0% 98%;
+  --primary: 195 95% 85%;
+  --primary-foreground: 240 4% 16%;
+  --secondary: 240 4% 16%;
+  --secondary-foreground: 0 0% 98%;
+  --muted: 240 6% 12%;
+  --muted-foreground: 240 5% 75%;
+  --accent: 240 4% 16%;
+  --accent-foreground: 0 0% 98%;
+  --destructive: 0 63% 31%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 4% 20%;
+  --input: 240 4% 16%;
+  --ring: 195 95% 85%;
+}
+
+html {
+  color-scheme: light;
+  font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+a {
+  transition: color 0.2s ease;
+}
+
+a:hover {
+  color: hsl(var(--primary) / 1);
+}
+
+.prose :where(a) {
+  color: hsl(var(--foreground) / 1);
+  font-weight: 600;
+}
+
+.prose :where(pre) {
+  border: 1px solid hsl(var(--border) / 1);
+}
