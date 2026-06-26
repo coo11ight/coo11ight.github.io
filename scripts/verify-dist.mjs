@@ -4,6 +4,7 @@ import { join } from 'node:path'
 const requiredFiles = [
   'dist/index.html',
   'dist/blog/index.html',
+  'dist/blog/learn-claude-code/index.html',
   'dist/about/index.html',
   'dist/contact/index.html',
   'dist/search/index.html',
@@ -56,9 +57,14 @@ if (!home.includes('COOLAI')) {
   console.error('Home page does not contain COOLAI')
   process.exit(1)
 }
+if (!home.includes('learn-claude-code s20')) {
+  console.error('Home page does not contain the learn-claude-code article')
+  process.exit(1)
+}
 
 const requiredHtmlFragments = [
   ['dist/index.html', 'data-polish="home-hero"'],
+  ['dist/blog/learn-claude-code/index.html', 'learn-claude-code s20'],
   ['dist/blog/coolai-start/index.html', 'data-polish="article-hero"'],
   ['dist/about/index.html', 'data-polish="about-focus"'],
   ['dist/contact/index.html', 'data-polish="contact-stack"']
@@ -69,6 +75,12 @@ for (const [file, fragment] of requiredHtmlFragments) {
     console.error(`Missing HTML fragment "${fragment}" in ${file}`)
     process.exit(1)
   }
+}
+
+const rss = readFileSync(join('dist', 'rss.xml'), 'utf8')
+if (!rss.includes('learn-claude-code s20')) {
+  console.error('RSS feed does not contain the learn-claude-code article')
+  process.exit(1)
 }
 
 const css = collectCssFiles('dist').map((file) => readFileSync(file, 'utf8')).join('\n')
