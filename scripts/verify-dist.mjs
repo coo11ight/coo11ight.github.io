@@ -103,4 +103,16 @@ if (missingCssSelectors.length > 0) {
   process.exit(1)
 }
 
+const requiredCssFragments = [
+  '--background: 200 72% 98%',
+  '.dark{--background: 200 72% 98%',
+  'background:linear-gradient(135deg,#ddf8fef2,#fcfcfd 38%,#fff 64%,#effbf8)',
+  'backdrop-filter:blur(18px)'
+]
+const missingCssFragments = requiredCssFragments.filter((fragment) => !css.includes(fragment))
+if (missingCssFragments.length > 0) {
+  console.error(`Missing generated CSS fragments:\n${missingCssFragments.join('\n')}`)
+  process.exit(1)
+}
+
 console.log('dist verification passed')

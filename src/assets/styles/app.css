@@ -1,47 +1,47 @@
 :root {
-  --background: 165 18% 98%;
-  --foreground: 220 12% 8%;
+  --background: 200 72% 98%;
+  --foreground: 215 28% 16%;
   --card: 0 0% 100%;
-  --card-foreground: 220 12% 8%;
+  --card-foreground: 215 28% 16%;
   --popover: 0 0% 100%;
-  --popover-foreground: 220 12% 8%;
-  --primary: 168 80% 31%;
+  --popover-foreground: 215 28% 16%;
+  --primary: 201 37% 42%;
   --primary-foreground: 0 0% 98%;
-  --secondary: 150 12% 94%;
-  --secondary-foreground: 220 12% 12%;
-  --muted: 150 12% 94%;
-  --muted-foreground: 220 8% 38%;
+  --secondary: 190 58% 94%;
+  --secondary-foreground: 215 28% 18%;
+  --muted: 194 55% 95%;
+  --muted-foreground: 211 18% 43%;
   --accent: 34 94% 54%;
-  --accent-foreground: 220 12% 8%;
+  --accent-foreground: 215 28% 16%;
   --destructive: 0 72% 50%;
   --destructive-foreground: 0 0% 98%;
-  --border: 160 9% 86%;
-  --input: 160 9% 88%;
-  --ring: 168 80% 31%;
+  --border: 198 26% 86%;
+  --input: 198 26% 88%;
+  --ring: 201 37% 42%;
   --radius: 0.5rem;
   --un-default-border-color: hsl(var(--border) / 1);
 }
 
 .dark {
-  --background: 130 8% 12%;
-  --foreground: 0 0% 96%;
-  --card: 130 7% 15%;
-  --card-foreground: 0 0% 98%;
-  --popover: 130 7% 15%;
-  --popover-foreground: 0 0% 98%;
-  --primary: 166 74% 62%;
-  --primary-foreground: 130 8% 10%;
-  --secondary: 130 6% 18%;
-  --secondary-foreground: 0 0% 98%;
-  --muted: 130 6% 18%;
-  --muted-foreground: 125 7% 78%;
-  --accent: 35 95% 60%;
-  --accent-foreground: 130 8% 10%;
-  --destructive: 0 63% 31%;
+  --background: 200 72% 98%;
+  --foreground: 215 28% 16%;
+  --card: 0 0% 100%;
+  --card-foreground: 215 28% 16%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 215 28% 16%;
+  --primary: 201 37% 42%;
+  --primary-foreground: 0 0% 98%;
+  --secondary: 190 58% 94%;
+  --secondary-foreground: 215 28% 18%;
+  --muted: 194 55% 95%;
+  --muted-foreground: 211 18% 43%;
+  --accent: 34 94% 54%;
+  --accent-foreground: 215 28% 16%;
+  --destructive: 0 72% 50%;
   --destructive-foreground: 0 0% 98%;
-  --border: 130 6% 28%;
-  --input: 130 6% 22%;
-  --ring: 166 74% 62%;
+  --border: 198 26% 86%;
+  --input: 198 26% 88%;
+  --ring: 201 37% 42%;
 }
 
 html {
@@ -51,17 +51,21 @@ html {
 }
 
 html.dark {
-  color-scheme: dark;
+  color-scheme: light;
 }
 
 body {
   min-height: 100vh;
   margin: 0;
   background:
-    linear-gradient(hsl(var(--border) / 0.2) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--border) / 0.16) 1px, transparent 1px),
-    hsl(var(--background) / 1);
-  background-size: 42px 42px;
+    linear-gradient(
+      135deg,
+      hsl(190 92% 93% / 0.95) 0%,
+      hsl(210 33% 99% / 1) 38%,
+      hsl(0 0% 100% / 1) 64%,
+      hsl(167 56% 96% / 1) 100%
+    );
+  background-attachment: fixed;
 }
 
 a {
@@ -87,8 +91,10 @@ a:hover {
 .coolai-surface {
   border: 1px solid hsl(var(--border) / 1);
   border-radius: 8px;
-  background: hsl(var(--card) / 0.82);
-  box-shadow: 0 18px 60px hsl(var(--foreground) / 0.08);
+  background: hsl(var(--card) / 0.72);
+  box-shadow: 0 18px 60px hsl(var(--primary) / 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .coolai-hero-mark {
@@ -97,10 +103,13 @@ a:hover {
   border: 1px solid hsl(var(--border) / 1);
   border-radius: 8px;
   background:
-    linear-gradient(hsl(var(--primary) / 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, hsl(var(--primary) / 0.1) 1px, transparent 1px),
-    hsl(var(--card) / 0.9);
+    linear-gradient(hsl(var(--primary) / 0.08) 1px, transparent 1px),
+    linear-gradient(90deg, hsl(var(--primary) / 0.07) 1px, transparent 1px),
+    linear-gradient(135deg, hsl(var(--card) / 0.86), hsl(var(--secondary) / 0.78));
   background-size: 22px 22px;
+  box-shadow: 0 22px 70px hsl(var(--primary) / 0.12);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
 }
 
 .coolai-hero-mark::after {
@@ -122,8 +131,11 @@ a:hover {
   display: block;
   border: 1px solid hsl(var(--border) / 1);
   border-radius: 8px;
-  background: hsl(var(--card) / 0.82);
+  background: hsl(var(--card) / 0.72);
   padding: 1.25rem;
+  box-shadow: 0 14px 50px hsl(var(--primary) / 0.08);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   transition:
     border-color 0.2s ease,
     background-color 0.2s ease,
