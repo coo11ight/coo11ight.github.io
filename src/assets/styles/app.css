@@ -23,24 +23,24 @@
 }
 
 .dark {
-  --background: 120 6% 7%;
+  --background: 130 8% 12%;
   --foreground: 0 0% 96%;
-  --card: 120 5% 10%;
+  --card: 130 7% 15%;
   --card-foreground: 0 0% 98%;
-  --popover: 120 5% 10%;
+  --popover: 130 7% 15%;
   --popover-foreground: 0 0% 98%;
   --primary: 166 74% 62%;
-  --primary-foreground: 120 6% 8%;
-  --secondary: 120 4% 16%;
+  --primary-foreground: 130 8% 10%;
+  --secondary: 130 6% 18%;
   --secondary-foreground: 0 0% 98%;
-  --muted: 120 4% 15%;
-  --muted-foreground: 120 5% 72%;
+  --muted: 130 6% 18%;
+  --muted-foreground: 125 7% 78%;
   --accent: 35 95% 60%;
-  --accent-foreground: 120 6% 8%;
+  --accent-foreground: 130 8% 10%;
   --destructive: 0 63% 31%;
   --destructive-foreground: 0 0% 98%;
-  --border: 120 4% 22%;
-  --input: 120 4% 18%;
+  --border: 130 6% 28%;
+  --input: 130 6% 22%;
   --ring: 166 74% 62%;
 }
 
@@ -158,6 +158,23 @@ a:hover {
   color: hsl(var(--primary) / 1);
 }
 
+.prose {
+  --un-prose-body: hsl(var(--foreground) / 0.86);
+  --un-prose-headings: hsl(var(--foreground) / 1);
+  --un-prose-links: hsl(var(--primary) / 1);
+  --un-prose-bold: hsl(var(--foreground) / 0.98);
+  --un-prose-counters: hsl(var(--muted-foreground) / 1);
+  --un-prose-bullets: hsl(var(--primary) / 0.75);
+  --un-prose-hr: hsl(var(--border) / 1);
+  --un-prose-quotes: hsl(var(--foreground) / 0.9);
+  --un-prose-quote-borders: hsl(var(--primary) / 0.55);
+  --un-prose-code: hsl(var(--foreground) / 0.95);
+  --un-prose-pre-code: hsl(var(--foreground) / 0.9);
+  --un-prose-pre-bg: hsl(var(--card) / 0.95);
+  --un-prose-th-borders: hsl(var(--border) / 1);
+  --un-prose-td-borders: hsl(var(--border) / 0.75);
+}
+
 .prose :where(a) {
   color: hsl(var(--foreground) / 1);
   font-weight: 600;
@@ -171,9 +188,17 @@ a:hover {
   line-height: 1.85;
 }
 
-.prose :where(h2, h3) {
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
   color: hsl(var(--foreground) / 1);
   font-weight: 650;
+}
+
+.prose strong {
+  color: hsl(var(--foreground) / 0.98);
+  font-weight: 700;
 }
 
 .prose :where(pre) {
@@ -182,10 +207,11 @@ a:hover {
   padding: 1rem;
 }
 
-.prose :where(code):not(pre code) {
+.prose code:not(pre code) {
   border: 1px solid hsl(var(--border) / 1);
   border-radius: 6px;
   background: hsl(var(--muted) / 0.8);
+  color: hsl(var(--foreground) / 0.95);
   padding: 0.08rem 0.35rem;
   font-size: 0.9em;
 }

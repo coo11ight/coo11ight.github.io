@@ -92,7 +92,10 @@ const requiredCssSelectors = [
   '.coolai-surface',
   '.coolai-hero-mark',
   '.coolai-post-card',
-  '.coolai-article-hero'
+  '.coolai-article-hero',
+  '.prose h2',
+  '.prose strong',
+  '.prose code:not(pre code)'
 ]
 const missingCssSelectors = requiredCssSelectors.filter((selector) => !css.includes(selector))
 if (missingCssSelectors.length > 0) {
