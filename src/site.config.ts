@@ -54,7 +54,7 @@ export const integ: IntegrationUserConfig = {
     applyTip: [
       { name: 'Name', val: 'COOLAI' },
       { name: 'Desc', val: '写作、技术与 AI 学习记录' },
-      { name: 'Link', val: 'https://coolai.example.com/' },
+      { name: 'Link', val: 'https://coo11ight.github.io/' },
       { name: 'Avatar', val: '/favicon.svg' }
     ]
   },

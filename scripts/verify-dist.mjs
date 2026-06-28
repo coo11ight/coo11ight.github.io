@@ -16,6 +16,7 @@ const forbiddenFragments = [
   '/links',
   '/talks',
   '/projects',
+  'coolai.example.com',
   'DevMode',
   'joye:toggle-dev',
   'Joye Personal Blog'
@@ -53,12 +54,17 @@ for (const file of htmlFiles) {
 }
 
 const home = readFileSync(join('dist', 'index.html'), 'utf8')
+const productionUrl = 'https://coo11ight.github.io'
 if (!home.includes('COOLAI')) {
   console.error('Home page does not contain COOLAI')
   process.exit(1)
 }
 if (!home.includes('learn-claude-code s20')) {
   console.error('Home page does not contain the learn-claude-code article')
+  process.exit(1)
+}
+if (!home.includes(`<link rel="canonical" href="${productionUrl}/">`)) {
+  console.error(`Home page canonical URL does not use ${productionUrl}`)
   process.exit(1)
 }
 
@@ -81,6 +87,15 @@ const rss = readFileSync(join('dist', 'rss.xml'), 'utf8')
 if (!rss.includes('learn-claude-code s20')) {
   console.error('RSS feed does not contain the learn-claude-code article')
   process.exit(1)
+}
+
+const productionUrlFiles = ['dist/rss.xml', 'dist/robots.txt', 'dist/sitemap-index.xml']
+for (const file of productionUrlFiles) {
+  const content = readFileSync(file, 'utf8')
+  if (!content.includes(productionUrl)) {
+    console.error(`${file} does not use ${productionUrl}`)
+    process.exit(1)
+  }
 }
 
 const css = collectCssFiles('dist').map((file) => readFileSync(file, 'utf8')).join('\n')
