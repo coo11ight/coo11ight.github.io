@@ -9,7 +9,8 @@ const requiredFiles = [
   'dist/contact/index.html',
   'dist/search/index.html',
   'dist/rss.xml',
-  'dist/robots.txt'
+  'dist/robots.txt',
+  'dist/images/learn-claude-code.png'
 ]
 
 const forbiddenFragments = [
@@ -71,6 +72,7 @@ if (!home.includes(`<link rel="canonical" href="${productionUrl}/">`)) {
 const requiredHtmlFragments = [
   ['dist/index.html', 'data-polish="home-hero"'],
   ['dist/blog/learn-claude-code/index.html', 'learn-claude-code s20'],
+  ['dist/blog/learn-claude-code/index.html', '/images/learn-claude-code.png'],
   ['dist/blog/coolai-start/index.html', 'data-polish="article-hero"'],
   ['dist/about/index.html', 'data-polish="about-focus"'],
   ['dist/contact/index.html', 'data-polish="contact-stack"']

@@ -319,12 +319,18 @@ while True:
 
 ---
 
+## s20 Agent 总览图
+
+![s20 Comprehensive Agent：全部机制挂在同一个循环上](/images/learn-claude-code.png)
+
+---
+
 ## 参考
 
 - 本文件所在目录：`learn-claude-code/s20_comprehensive/`
 - 核心代码：`code.py`
 - 官方说明：`README.md` / `README.en.md`
-- 架构图：`images/system-architecture.svg`
+- 架构图：本文末尾的「s20 Agent 总览图」
 
 ---
 
