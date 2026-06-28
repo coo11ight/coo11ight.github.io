@@ -68,6 +68,10 @@ if (!home.includes(`<link rel="canonical" href="${productionUrl}/">`)) {
   console.error(`Home page canonical URL does not use ${productionUrl}`)
   process.exit(1)
 }
+if (!home.includes('media="(prefers-color-scheme: dark)" content="#17282e"')) {
+  console.error('Home page does not declare the dark browser theme color')
+  process.exit(1)
+}
 
 const requiredHtmlFragments = [
   ['dist/index.html', 'data-polish="home-hero"'],
@@ -122,7 +126,12 @@ if (missingCssSelectors.length > 0) {
 
 const requiredCssFragments = [
   '--background: 200 72% 98%',
-  '.dark{--background: 200 72% 98%',
+  '.dark{--background: 196 33% 14%',
+  'html.dark{color-scheme:dark}',
+  'html.dark body{background:linear-gradient(135deg',
+  '.prose table{color:hsl(var(--foreground) / .82)',
+  '.prose th{color:hsl(var(--foreground) / .96)',
+  '.prose td{color:hsl(var(--foreground) / .82)',
   'background:linear-gradient(135deg,#ddf8fef2,#fcfcfd 38%,#fff 64%,#effbf8)',
   'backdrop-filter:blur(18px)'
 ]
